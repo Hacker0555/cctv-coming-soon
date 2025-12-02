@@ -1,22 +1,24 @@
 /* frontend/src/App.css */
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #111827;
   background-color: #fff6e8;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
   background: #fff6e8;
 }
 
+/* MAIN PAGE WRAPPER – centered on big screens */
 .page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: #fff6e8;
-  padding: 24px 72px;
+
+  /* key bits for centering */
+  max-width: 1100px;
+  margin: 0 auto;       /* center horizontally */
+  padding: 24px 32px;
 }
 
 .header {
@@ -25,20 +27,19 @@ body {
   align-items: center;
 }
 
-/* --- LOGO AREA --- */
+/* --- LOGO --- */
 .logo {
   display: flex;
   align-items: center;
 }
 
-/* image logo */
 .logo-img {
-  width: 240px;      /* best fit for your design */
+  width: 220px;
   height: auto;
   object-fit: contain;
 }
 
-/* old text logo pieces (no longer used, can keep or delete) */
+/* old logo bits not used */
 .logo-square {
   display: none;
 }
@@ -54,22 +55,24 @@ body {
   color: #4b5563;
 }
 
-/* --- HERO --- */
+/* --- HERO SECTION --- */
 .hero {
   flex: 1;
   display: flex;
   gap: 48px;
   align-items: center;
-  justify-content: space-between;
+
+  /* instead of stretching to edges, keep content grouped */
+  justify-content: center;
   margin-top: 40px;
 }
 
 .hero-left {
-  max-width: 560px;
+  max-width: 520px;
 }
 
 .hero-left h1 {
-  font-size: 44px;
+  font-size: 40px;
   line-height: 1.1;
   margin-bottom: 20px;
 }
@@ -173,7 +176,7 @@ body {
 /* --- RIGHT SIDE MOCKUP --- */
 .hero-right {
   position: relative;
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   justify-content: center;
 }
@@ -229,13 +232,21 @@ body {
   color: #6b7280;
 }
 
+/* Make the Coming Soon button pop */
 .phone-btn {
   align-self: stretch;
   padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
   font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.phone-btn:hover {
+  filter: brightness(1.05);
 }
 
 /* --- SHAPES --- */
@@ -281,6 +292,7 @@ body {
 @media (max-width: 900px) {
   .page {
     padding: 16px 20px;
+    max-width: 100%;
   }
 
   .hero {
@@ -299,6 +311,6 @@ body {
   }
 
   .logo-img {
-    width: 180px; /* slightly smaller for mobile */
+    width: 180px;
   }
 }
