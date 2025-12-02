@@ -1,5 +1,5 @@
 // frontend/src/App.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import logo from "./assets/lookoutline-logo.png"; // make sure this file exists
 
@@ -31,6 +31,86 @@ const faqs = [
   },
 ];
 
+const whyPoints = [
+  {
+    icon: "🧠",
+    title: "Consultative, not pushy",
+    text: "We first understand your layout, risks and budget, then recommend only what you truly need – not just the costliest kit.",
+  },
+  {
+    icon: "⚡",
+    title: "Fast & clean installation",
+    text: "Neat cabling, proper routing and finishing. Most standard 4–8 camera setups are completed within a day after approval.",
+  },
+  {
+    icon: "📱",
+    title: "Mobile-first experience",
+    text: "Fully configured mobile app with live view, playback, alerts and sharing access to family or team members.",
+  },
+  {
+    icon: "🤝",
+    title: "Long-term relationship",
+    text: "Annual maintenance, health checks, upgrades and remote support so your security never goes offline quietly.",
+  },
+];
+
+const packages = [
+  {
+    label: "Home starter",
+    name: "2-Camera HD Kit",
+    price: "Starting around ₹8,999*",
+    includes: [
+      "2 indoor/outdoor HD cameras",
+      "DVR/NVR configuration",
+      "Mobile viewing setup",
+      "Basic cabling & installation",
+    ],
+    note: "*Final price depends on exact layout & cable length.",
+  },
+  {
+    label: "Apartment / villa",
+    name: "4-Camera Coverage",
+    price: "Usually from ₹12,999*",
+    includes: [
+      "4 HD cameras for key points",
+      "Remote access on mobile",
+      "Basic signage for deterrence",
+      "1 free health check in 6 months",
+    ],
+    note: "*Site visit recommended for an accurate quote.",
+  },
+  {
+    label: "Business & offices",
+    name: "Custom CCTV + Biometric",
+    price: "Custom quote",
+    includes: [
+      "Mix of CCTV & biometric devices",
+      "Access control & attendance logs",
+      "Multi-user mobile/web access",
+      "Priority service support",
+    ],
+    note: "Best suited for shops, offices, warehouses & clinics.",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Rahul S",
+    area: "HSR Layout",
+    text: "The team helped me plan camera angles properly instead of just installing anywhere. Mobile view is smooth even on 4G.",
+  },
+  {
+    name: "Priya & Arjun",
+    area: "Whitefield",
+    text: "Got our villa secured with 6 cameras. Wiring was done very neatly and they explained the app patiently to my parents.",
+  },
+  {
+    name: "Mohan Traders",
+    area: "KR Puram",
+    text: "We use their CCTV + biometric combo in our office. Support has been quick whenever we had a query.",
+  },
+];
+
 function App() {
   const [formData, setFormData] = useState({
     name: "",
@@ -44,6 +124,27 @@ function App() {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  // scroll-into-view animations
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-animate]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -120,12 +221,15 @@ function App() {
           <a href="#products">Products</a>
           <a href="#services">Services</a>
           <a href="#support">Support</a>
+          <a href="tel:+919876543210" className="nav-cta">
+            📞 Call Now
+          </a>
         </nav>
       </header>
 
       {/* MAIN HERO (Services + Lead form) */}
       <main className="hero" id="services">
-        <section className="hero-left">
+        <section className="hero-left" data-animate>
           <h1>
             Smart CCTV &<br />
             Biometric Security
@@ -268,11 +372,22 @@ function App() {
           </div>
         </section>
 
-        <section className="hero-right">
+        <section className="hero-right" data-animate>
           <div className="phone-card">
             <div className="phone-header">Live View</div>
             <div className="phone-body">
-              <div className="camera-view" />
+              <div className="camera-view">
+                <div className="camera-overlay">
+                  <div className="camera-rec">
+                    <span className="camera-rec-dot" />
+                    <span className="camera-rec-text">REC</span>
+                  </div>
+                  <div className="camera-meta">
+                    <span className="camera-location">Main Entrance</span>
+                    <span className="camera-status">LIVE • 1080p</span>
+                  </div>
+                </div>
+              </div>
               <div className="badge">24×7 Monitoring</div>
               <div className="phone-text">
                 <h3>Security Got Smarter</h3>
@@ -289,7 +404,7 @@ function App() {
       </main>
 
       {/* HOW IT WORKS TIMELINE */}
-      <section className="timeline-section">
+      <section className="timeline-section" data-animate>
         <h2 className="timeline-title">How it works</h2>
         <p className="timeline-subtitle">
           Just three simple steps to secure your home or business.
@@ -329,9 +444,27 @@ function App() {
         </div>
       </section>
 
-      {/* PRODUCTS: brands + trust strip */}
+      {/* WHY CHOOSE US */}
+      <section className="why-section" data-animate>
+        <h2 className="why-title">Why choose LookOutline?</h2>
+        <p className="why-subtitle">
+          Not just hardware. We focus on the right design, clean execution and
+          long-term reliability.
+        </p>
+        <div className="why-grid">
+          {whyPoints.map((item) => (
+            <div key={item.title} className="why-card">
+              <div className="why-icon">{item.icon}</div>
+              <h3 className="why-card-title">{item.title}</h3>
+              <p className="why-card-text">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PRODUCTS: brands + trust strip + packages */}
       <section id="products">
-        <section className="trust-strip">
+        <section className="trust-strip" data-animate>
           <div className="trust-item">
             <div className="trust-icon">🛡️</div>
             <div className="trust-text">
@@ -370,7 +503,7 @@ function App() {
           </div>
         </section>
 
-        <section className="brands-section">
+        <section className="brands-section" data-animate>
           <p className="brands-label">We work with leading security brands</p>
           <div className="brands-row">
             <span className="brand-pill">Hikvision</span>
@@ -381,11 +514,65 @@ function App() {
             <span className="brand-pill">Biometric OEMs</span>
           </div>
         </section>
+
+        {/* PACKAGES PREVIEW */}
+        <section className="packages-section" data-animate>
+          <h2 className="packages-title">A quick idea of packages</h2>
+          <p className="packages-subtitle">
+            Exact pricing depends on your layout, cable length and brand
+            preference – these are just ballpark starting points.
+          </p>
+          <div className="packages-grid">
+            {packages.map((pkg) => (
+              <div key={pkg.name} className="package-card">
+                <p className="package-label">{pkg.label}</p>
+                <h3 className="package-name">{pkg.name}</h3>
+                <p className="package-price">{pkg.price}</p>
+                <ul className="package-list">
+                  {pkg.includes.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <p className="package-note">{pkg.note}</p>
+              </div>
+            ))}
+          </div>
+          <p className="packages-footer">
+            Share a few details above and we&apos;ll send a{" "}
+            <strong>clear, no-obligation quote</strong> tailored for your space.
+          </p>
+        </section>
       </section>
 
-      {/* SUPPORT: FAQ + location */}
+      {/* SUPPORT: Testimonials + FAQ + location */}
       <section id="support">
-        <section className="faq-section">
+        {/* TESTIMONIALS */}
+        <section className="testimonials-section" data-animate>
+          <h2 className="testimonials-title">What customers say</h2>
+          <p className="testimonials-subtitle">
+            Early customers who&apos;ve worked with our team for CCTV and
+            biometric installations.
+          </p>
+          <div className="testimonials-row">
+            {testimonials.map((t) => (
+              <div key={t.name} className="testimonial-card">
+                <div className="testimonial-header">
+                  <div className="testimonial-avatar">
+                    {t.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="testimonial-name">{t.name}</p>
+                    <p className="testimonial-area">{t.area}</p>
+                  </div>
+                </div>
+                <div className="testimonial-rating">★★★★★</div>
+                <p className="testimonial-text">“{t.text}”</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="faq-section" data-animate>
           <h2 className="faq-title">Frequently asked questions</h2>
           <div className="faq-list">
             {faqs.map((item, index) => (
@@ -415,7 +602,7 @@ function App() {
           </div>
         </section>
 
-        <section className="location-section">
+        <section className="location-section" data-animate>
           <div className="location-header">
             <div className="location-icon">📍</div>
             <div>
