@@ -27,7 +27,7 @@ function App() {
     setLoading(true);
 
     try {
-      // IMPORTANT: use relative URL for production
+      // IMPORTANT: relative URL works on both localhost (with proxy) and live domain
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,12 +81,20 @@ function App() {
             Smart CCTV &<br />
             Biometric Security
           </h1>
+
           <p className="subtitle">
             We&apos;re launching a full-stack security service platform – sales,
             installation and maintenance of CCTV cameras, NVRs, and biometric
             attendance systems for homes, apartments and businesses in
             Bangalore.
           </p>
+
+          {/* NEW: key points list */}
+          <ul className="features-list">
+            <li>HD night vision CCTV for homes, offices &amp; apartments</li>
+            <li>Biometric attendance, access control &amp; visitor logs</li>
+            <li>Remote mobile viewing with alerts &amp; cloud backup options</li>
+          </ul>
 
           <p className="mini-text">
             Leave your details and we&apos;ll get back to you with a free site
@@ -168,6 +176,22 @@ function App() {
               </p>
             )}
           </form>
+
+          {/* NEW: quick direct contact strip (update phone/whatsapp to your real number) */}
+          <div className="contact-quick">
+            <span>Prefer talking now?</span>
+            <a href="tel:+918088001088" className="contact-link">
+              📞 Call us: +91 80880 01088
+            </a>
+            <a
+              href="https://wa.me/918088001088"
+              target="_blank"
+              rel="noreferrer"
+              className="contact-link"
+            >
+              💬 WhatsApp us
+            </a>
+          </div>
 
           <div className="coming-soon">
             We are almost ready to launch. Be the first to know.

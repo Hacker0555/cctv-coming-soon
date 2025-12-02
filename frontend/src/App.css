@@ -15,9 +15,8 @@ body {
   flex-direction: column;
   background: #fff6e8;
 
-  /* key bits for centering */
   max-width: 1100px;
-  margin: 0 auto;       /* center horizontally */
+  margin: 0 auto;
   padding: 24px 32px;
 }
 
@@ -39,15 +38,6 @@ body {
   object-fit: contain;
 }
 
-/* old logo bits not used */
-.logo-square {
-  display: none;
-}
-
-.logo-text {
-  display: none;
-}
-
 /* --- NAV --- */
 .nav-links a {
   font-size: 14px;
@@ -61,8 +51,6 @@ body {
   display: flex;
   gap: 48px;
   align-items: center;
-
-  /* instead of stretching to edges, keep content grouped */
   justify-content: center;
   margin-top: 40px;
 }
@@ -81,7 +69,19 @@ body {
   font-size: 15px;
   line-height: 1.6;
   color: #4b5563;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+}
+
+/* NEW: bullets under hero text */
+.features-list {
+  margin: 0 0 14px 0;
+  padding-left: 18px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.features-list li {
+  margin-bottom: 4px;
 }
 
 .mini-text {
@@ -151,6 +151,22 @@ body {
   color: #dc2626;
 }
 
+/* NEW: Quick contact strip */
+.contact-quick {
+  margin-top: 14px;
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.contact-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2563eb;
+}
+
 /* --- EXTRA TEXT --- */
 .coming-soon {
   margin-top: 16px;
@@ -189,6 +205,9 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   z-index: 2;
+
+  /* subtle float animation */
+  animation: float 4s ease-in-out infinite;
 }
 
 .phone-header {
@@ -232,7 +251,7 @@ body {
   color: #6b7280;
 }
 
-/* Make the Coming Soon button pop */
+/* Coming Soon button on phone card */
 .phone-btn {
   align-self: stretch;
   padding: 8px 12px;
@@ -262,6 +281,7 @@ body {
   background: #f97316;
   top: 40px;
   right: 40px;
+  animation: sway 6s ease-in-out infinite;
 }
 
 .shape-yellow {
@@ -270,6 +290,7 @@ body {
   background: #fde047;
   top: 0;
   left: 40px;
+  animation: sway 7s ease-in-out infinite;
 }
 
 .shape-blue {
@@ -279,6 +300,7 @@ body {
   bottom: 0;
   right: 10px;
   border-radius: 30px;
+  animation: sway 5.5s ease-in-out infinite;
 }
 
 /* --- FOOTER --- */
@@ -286,6 +308,34 @@ body {
   margin-top: 32px;
   font-size: 12px;
   color: #9ca3af;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes sway {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 0.95;
+  }
 }
 
 /* --- MOBILE --- */
