@@ -1,0 +1,304 @@
+/* frontend/src/App.css */
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #111827;
+  background-color: #fff6e8;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fff6e8;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff6e8;
+  padding: 24px 72px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- LOGO AREA --- */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* image logo */
+.logo-img {
+  width: 240px;      /* best fit for your design */
+  height: auto;
+  object-fit: contain;
+}
+
+/* old text logo pieces (no longer used, can keep or delete) */
+.logo-square {
+  display: none;
+}
+
+.logo-text {
+  display: none;
+}
+
+/* --- NAV --- */
+.nav-links a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #4b5563;
+}
+
+/* --- HERO --- */
+.hero {
+  flex: 1;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.hero-left {
+  max-width: 560px;
+}
+
+.hero-left h1 {
+  font-size: 44px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.mini-text {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+/* --- FORM --- */
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 580px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.lead-form input,
+.lead-form select,
+.lead-form textarea {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  outline: none;
+}
+
+.lead-form input:focus,
+.lead-form select:focus,
+.lead-form textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+.lead-form button {
+  align-self: flex-start;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.lead-form button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.status-message {
+  font-size: 13px;
+}
+
+.status-message.success {
+  color: #16a34a;
+}
+
+.status-message.error {
+  color: #dc2626;
+}
+
+/* --- EXTRA TEXT --- */
+.coming-soon {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.social {
+  margin-top: 16px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social a {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* --- RIGHT SIDE MOCKUP --- */
+.hero-right {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.phone-card {
+  position: relative;
+  width: 260px;
+  border-radius: 26px;
+  background: white;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.phone-header {
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.phone-body {
+  padding: 16px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.camera-view {
+  height: 120px;
+  border-radius: 16px;
+  background-image: linear-gradient(135deg, #2563eb, #38bdf8);
+}
+
+.badge {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.phone-text h3 {
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+.phone-text p {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.phone-btn {
+  align-self: stretch;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 13px;
+}
+
+/* --- SHAPES --- */
+.shape {
+  position: absolute;
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.shape-red {
+  width: 180px;
+  height: 180px;
+  background: #f97316;
+  top: 40px;
+  right: 40px;
+}
+
+.shape-yellow {
+  width: 120px;
+  height: 120px;
+  background: #fde047;
+  top: 0;
+  left: 40px;
+}
+
+.shape-blue {
+  width: 60px;
+  height: 220px;
+  background: #2563eb;
+  bottom: 0;
+  right: 10px;
+  border-radius: 30px;
+}
+
+/* --- FOOTER --- */
+.footer {
+  margin-top: 32px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 900px) {
+  .page {
+    padding: 16px 20px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-right {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 32px;
+  }
+
+  .shape {
+    display: none;
+  }
+
+  .logo-img {
+    width: 180px; /* slightly smaller for mobile */
+  }
+}
