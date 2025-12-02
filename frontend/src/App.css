@@ -72,7 +72,7 @@ body {
   margin-bottom: 12px;
 }
 
-/* NEW: bullets under hero text */
+/* bullets under hero text */
 .features-list {
   margin: 0 0 14px 0;
   padding-left: 18px;
@@ -82,6 +82,35 @@ body {
 
 .features-list li {
   margin-bottom: 4px;
+}
+
+/* quick facts pills */
+.quick-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.fact-pill {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fefce8;
+  border: 1px solid #facc15;
+}
+
+.fact-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #854d0e;
+}
+
+.fact-text {
+  font-size: 12px;
+  color: #92400e;
 }
 
 .mini-text {
@@ -151,7 +180,7 @@ body {
   color: #dc2626;
 }
 
-/* NEW: Quick contact strip */
+/* Quick contact strip */
 .contact-quick {
   margin-top: 14px;
   font-size: 13px;
@@ -206,7 +235,6 @@ body {
   overflow: hidden;
   z-index: 2;
 
-  /* subtle float animation */
   animation: float 4s ease-in-out infinite;
 }
 
@@ -303,9 +331,269 @@ body {
   animation: sway 5.5s ease-in-out infinite;
 }
 
+/* --- TIMELINE SECTION --- */
+.timeline-section {
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+
+.timeline-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: #111827;
+}
+
+.timeline-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 10px;
+}
+
+.timeline-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.timeline-step {
+  flex: 1 1 250px;
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.timeline-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.timeline-content h3 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.timeline-content p {
+  margin: 0;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* --- TRUST STRIP --- */
+.trust-strip {
+  margin-top: 24px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: #fffbeb;
+  border: 1px solid #facc15;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 220px;
+  flex: 1 1 220px;
+}
+
+.trust-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #fef3c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.trust-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.trust-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #78350f;
+}
+
+.trust-subtitle {
+  font-size: 12px;
+  color: #854d0e;
+}
+
+/* --- BRANDS SECTION --- */
+.brands-section {
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+.brands-label {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.brands-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.brand-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+/* --- FAQ SECTION --- */
+.faq-section {
+  margin-top: 28px;
+  margin-bottom: 16px;
+}
+
+.faq-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.faq-list {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 8px 8px 4px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #111827;
+}
+
+.faq-toggle {
+  font-size: 18px;
+  line-height: 1;
+  margin-left: 8px;
+}
+
+.faq-answer {
+  padding: 0 12px 10px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* --- LOCATION SECTION --- */
+.location-section {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.location-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.location-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+.location-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 2px 0 0;
+}
+
+.location-box {
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  padding: 12px 14px;
+}
+
+.location-main {
+  font-size: 14px;
+  margin: 0 0 8px;
+  color: #111827;
+}
+
+.location-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.location-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  font-size: 12px;
+  color: #374151;
+}
+
+.location-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
 /* --- FOOTER --- */
 .footer {
-  margin-top: 32px;
+  margin-top: 8px;
   font-size: 12px;
   color: #9ca3af;
 }
@@ -338,6 +626,33 @@ body {
   }
 }
 
+/* --- FLOATING WHATSAPP BUTTON --- */
+.floating-whatsapp {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.5);
+  z-index: 50;
+}
+
+.wa-icon {
+  font-size: 16px;
+}
+
+.wa-text {
+  white-space: nowrap;
+}
+
 /* --- MOBILE --- */
 @media (max-width: 900px) {
   .page {
@@ -362,5 +677,19 @@ body {
 
   .logo-img {
     width: 180px;
+  }
+
+  .trust-strip {
+    padding: 10px 12px;
+  }
+
+  .floating-whatsapp {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px 12px;
+  }
+
+  .location-box {
+    padding: 10px 12px;
   }
 }
