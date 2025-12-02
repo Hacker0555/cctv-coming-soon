@@ -32,6 +32,15 @@ body {
   align-items: center;
 }
 
+.logo-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
 .logo-img {
   width: 220px;
   height: auto;
@@ -39,10 +48,27 @@ body {
 }
 
 /* --- NAV --- */
-.nav-links a {
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 14px;
+}
+
+.nav-links a {
   text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
   color: #4b5563;
+  background: transparent;
+  transition: all 0.18s ease;
+}
+
+.nav-links a:hover {
+  background: #111827;
+  color: #f9fafb;
+  border-color: #111827;
 }
 
 /* --- HERO SECTION --- */
@@ -658,6 +684,17 @@ body {
   .page {
     padding: 16px 20px;
     max-width: 100%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .nav-links {
+    gap: 6px;
+    flex-wrap: wrap;
   }
 
   .hero {

@@ -96,18 +96,35 @@ function App() {
     setOpenFaqIndex((prev) => (prev === index ? null : index));
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <div className="page">
+    <div className="page" id="top">
       <header className="header">
         <div className="logo">
-          <img src={logo} alt="LookOutline logo" className="logo-img" />
+          <button
+            type="button"
+            className="logo-button"
+            onClick={scrollToTop}
+            aria-label="Go to home"
+          >
+            <img src={logo} alt="LookOutline logo" className="logo-img" />
+          </button>
         </div>
         <nav className="nav-links">
-          <a href="#home">Home</a>
+          <a href="#products">Products</a>
+          <a href="#services">Services</a>
+          <a href="#support">Support</a>
         </nav>
       </header>
 
-      <main className="hero" id="home">
+      {/* MAIN HERO (Services + Lead form) */}
+      <main className="hero" id="services">
         <section className="hero-left">
           <h1>
             Smart CCTV &<br />
@@ -312,118 +329,129 @@ function App() {
         </div>
       </section>
 
-      {/* TRUST BADGES STRIP */}
-      <section className="trust-strip">
-        <div className="trust-item">
-          <div className="trust-icon">🛡️</div>
-          <div className="trust-text">
-            <span className="trust-title">500+ installations</span>
-            <span className="trust-subtitle">Homes &amp; businesses secured</span>
-          </div>
-        </div>
-        <div className="trust-item">
-          <div className="trust-icon">⭐</div>
-          <div className="trust-text">
-            <span className="trust-title">4.9/5 rated service</span>
-            <span className="trust-subtitle">Trusted by Bangalore customers</span>
-          </div>
-        </div>
-        <div className="trust-item">
-          <div className="trust-icon">🧰</div>
-          <div className="trust-text">
-            <span className="trust-title">Certified technicians</span>
-            <span className="trust-subtitle">Professional installation &amp; support</span>
-          </div>
-        </div>
-        <div className="trust-item">
-          <div className="trust-icon">📍</div>
-          <div className="trust-text">
-            <span className="trust-title">Bangalore-wide coverage</span>
-            <span className="trust-subtitle">Apartments, villas &amp; offices</span>
-          </div>
-        </div>
-      </section>
-
-      {/* BRANDS SECTION */}
-      <section className="brands-section">
-        <p className="brands-label">We work with leading security brands</p>
-        <div className="brands-row">
-          <span className="brand-pill">Hikvision</span>
-          <span className="brand-pill">CP Plus</span>
-          <span className="brand-pill">Dahua</span>
-          <span className="brand-pill">Honeywell</span>
-          <span className="brand-pill">Realme / TP-Link</span>
-          <span className="brand-pill">Biometric OEMs</span>
-        </div>
-      </section>
-
-      {/* FAQ SECTION */}
-      <section className="faq-section">
-        <h2 className="faq-title">Frequently asked questions</h2>
-        <div className="faq-list">
-          {faqs.map((item, index) => (
-            <div
-              key={item.question}
-              className={`faq-item ${
-                openFaqIndex === index ? "faq-open" : ""
-              }`}
-            >
-              <button
-                type="button"
-                className="faq-question"
-                onClick={() => toggleFaq(index)}
-              >
-                <span>{item.question}</span>
-                <span className="faq-toggle">
-                  {openFaqIndex === index ? "−" : "+"}
-                </span>
-              </button>
-              {openFaqIndex === index && (
-                <div className="faq-answer">
-                  <p>{item.answer}</p>
-                </div>
-              )}
+      {/* PRODUCTS: brands + trust strip */}
+      <section id="products">
+        <section className="trust-strip">
+          <div className="trust-item">
+            <div className="trust-icon">🛡️</div>
+            <div className="trust-text">
+              <span className="trust-title">500+ installations</span>
+              <span className="trust-subtitle">
+                Homes &amp; businesses secured
+              </span>
             </div>
-          ))}
-        </div>
+          </div>
+          <div className="trust-item">
+            <div className="trust-icon">⭐</div>
+            <div className="trust-text">
+              <span className="trust-title">4.9/5 rated service</span>
+              <span className="trust-subtitle">
+                Trusted by Bangalore customers
+              </span>
+            </div>
+          </div>
+          <div className="trust-item">
+            <div className="trust-icon">🧰</div>
+            <div className="trust-text">
+              <span className="trust-title">Certified technicians</span>
+              <span className="trust-subtitle">
+                Professional installation &amp; support
+              </span>
+            </div>
+          </div>
+          <div className="trust-item">
+            <div className="trust-icon">📍</div>
+            <div className="trust-text">
+              <span className="trust-title">Bangalore-wide coverage</span>
+              <span className="trust-subtitle">
+                Apartments, villas &amp; offices
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section className="brands-section">
+          <p className="brands-label">We work with leading security brands</p>
+          <div className="brands-row">
+            <span className="brand-pill">Hikvision</span>
+            <span className="brand-pill">CP Plus</span>
+            <span className="brand-pill">Dahua</span>
+            <span className="brand-pill">Honeywell</span>
+            <span className="brand-pill">Realme / TP-Link</span>
+            <span className="brand-pill">Biometric OEMs</span>
+          </div>
+        </section>
       </section>
 
-      {/* LOCATION / SERVICE AREA SECTION */}
-      <section className="location-section">
-        <div className="location-header">
-          <div className="location-icon">📍</div>
-          <div>
-            <h2 className="location-title">Where we currently serve</h2>
-            <p className="location-subtitle">
-              We&apos;re starting with complete coverage across Bangalore city.
+      {/* SUPPORT: FAQ + location */}
+      <section id="support">
+        <section className="faq-section">
+          <h2 className="faq-title">Frequently asked questions</h2>
+          <div className="faq-list">
+            {faqs.map((item, index) => (
+              <div
+                key={item.question}
+                className={`faq-item ${
+                  openFaqIndex === index ? "faq-open" : ""
+                }`}
+              >
+                <button
+                  type="button"
+                  className="faq-question"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <span>{item.question}</span>
+                  <span className="faq-toggle">
+                    {openFaqIndex === index ? "−" : "+"}
+                  </span>
+                </button>
+                {openFaqIndex === index && (
+                  <div className="faq-answer">
+                    <p>{item.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="location-section">
+          <div className="location-header">
+            <div className="location-icon">📍</div>
+            <div>
+              <h2 className="location-title">Where we currently serve</h2>
+              <p className="location-subtitle">
+                We&apos;re starting with complete coverage across Bangalore
+                city.
+              </p>
+            </div>
+          </div>
+
+          <div className="location-box">
+            <p className="location-main">
+              <strong>Bangalore –</strong> North, South, East &amp; West
+            </p>
+            <div className="location-grid">
+              <span className="location-pill">Electronic City</span>
+              <span className="location-pill">Whitefield</span>
+              <span className="location-pill">Marathahalli</span>
+              <span className="location-pill">HSR Layout</span>
+              <span className="location-pill">BTM Layout</span>
+              <span className="location-pill">Yelahanka</span>
+              <span className="location-pill">Hebbal</span>
+              <span className="location-pill">KR Puram</span>
+              <span className="location-pill">Jayanagar</span>
+              <span className="location-pill">JP Nagar</span>
+              <span className="location-pill">Indiranagar</span>
+              <span className="location-pill">Many more localities…</span>
+            </div>
+            <p className="location-note">
+              If you&apos;re within Bangalore city limits, we&apos;ll most
+              likely cover your area. Leave your details above and we&apos;ll
+              confirm service availability.
             </p>
           </div>
-        </div>
-
-        <div className="location-box">
-          <p className="location-main">
-            <strong>Bangalore –</strong> North, South, East &amp; West
-          </p>
-          <div className="location-grid">
-            <span className="location-pill">Electronic City</span>
-            <span className="location-pill">Whitefield</span>
-            <span className="location-pill">Marathahalli</span>
-            <span className="location-pill">HSR Layout</span>
-            <span className="location-pill">BTM Layout</span>
-            <span className="location-pill">Yelahanka</span>
-            <span className="location-pill">Hebbal</span>
-            <span className="location-pill">KR Puram</span>
-            <span className="location-pill">Jayanagar</span>
-            <span className="location-pill">JP Nagar</span>
-            <span className="location-pill">Indiranagar</span>
-            <span className="location-pill">Many more localities…</span>
-          </div>
-          <p className="location-note">
-            If you&apos;re within Bangalore city limits, we&apos;ll most likely
-            cover your area. Leave your details above and we&apos;ll confirm
-            service availability.
-          </p>
-        </div>
+        </section>
       </section>
 
       {/* Floating WhatsApp button */}
