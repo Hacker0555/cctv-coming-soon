@@ -221,7 +221,7 @@ function App() {
           <a href="#products">Products</a>
           <a href="#services">Services</a>
           <a href="#support">Support</a>
-          <a href="tel:+919876543210" className="nav-cta">
+          <a href="tel:+918088001088" className="nav-cta">
             📞 Call Now
           </a>
         </nav>
@@ -347,11 +347,11 @@ function App() {
 
           <div className="contact-quick">
             <span>Prefer talking now?</span>
-            <a href="tel:+919876543210" className="contact-link">
-              📞 Call us: +91 98765 43210
+            <a href="tel:+918088001088" className="contact-link">
+              📞 Call us: +91 80880 01088
             </a>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/918088001088"
               target="_blank"
               rel="noreferrer"
               className="contact-link"
@@ -643,7 +643,7 @@ function App() {
 
       {/* Floating WhatsApp button */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/918088001088"
         target="_blank"
         rel="noreferrer"
         className="floating-whatsapp"
