@@ -119,6 +119,49 @@ const quickQuestions = [
   "Can I view cameras on my mobile?",
 ];
 
+/* ---------- COUNTDOWN HELPERS (persistent 90 days) ---------- */
+
+const LAUNCH_OFFSET_DAYS = 90;
+
+// Get or create a fixed launch date (90 days from first visit)
+const getLaunchDate = () => {
+  if (typeof window !== "undefined") {
+    const stored = window.localStorage.getItem("lookoutline_launch_date");
+    if (stored) {
+      const d = new Date(stored);
+      if (!Number.isNaN(d.getTime())) return d;
+    }
+  }
+
+  const d = new Date();
+  d.setDate(d.getDate() + LAUNCH_OFFSET_DAYS);
+
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem("lookoutline_launch_date", d.toISOString());
+  }
+
+  return d;
+};
+
+const calculateTimeLeft = (targetDate) => {
+  const now = new Date();
+  const diff = targetDate.getTime() - now.getTime();
+
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / (24 * 60 * 60));
+  const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+  const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+  const seconds = totalSeconds % 60;
+
+  return { days, hours, minutes, seconds };
+};
+
+/* --------------------------- APP --------------------------- */
+
 function App() {
   const [formData, setFormData] = useState({
     name: "",
@@ -136,13 +179,11 @@ function App() {
   // theme: light / dark
   const [theme, setTheme] = useState("light");
 
-  // countdown timer (90 days from now)
-  const [timeLeft, setTimeLeft] = useState({
-    days: 90,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  // countdown timer – fixed launch date (90 days from first visit)
+  const [launchDate] = useState(getLaunchDate);
+  const [timeLeft, setTimeLeft] = useState(() =>
+    calculateTimeLeft(launchDate)
+  );
 
   // simple chat assistant
   const [chatOpen, setChatOpen] = useState(false);
@@ -181,39 +222,14 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // countdown logic – 90 days from first visit
+  // countdown logic – recompute every second using fixed launchDate
   useEffect(() => {
-    const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 90);
-
-    let timerId;
-
-    const tick = () => {
-      const now = new Date();
-      const diff = launchDate.getTime() - now.getTime();
-
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        if (timerId) clearInterval(timerId);
-        return;
-      }
-
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / (24 * 60 * 60));
-      const hours = Math.floor(
-        (totalSeconds % (24 * 60 * 60)) / (60 * 60)
-      );
-      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-      const seconds = totalSeconds % 60;
-
-      setTimeLeft({ days, hours, minutes, seconds });
-    };
-
-    tick();
-    timerId = setInterval(tick, 1000);
+    const timerId = setInterval(() => {
+      setTimeLeft(calculateTimeLeft(launchDate));
+    }, 1000);
 
     return () => clearInterval(timerId);
-  }, []);
+  }, [launchDate]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
