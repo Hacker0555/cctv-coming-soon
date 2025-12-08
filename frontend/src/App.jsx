@@ -582,9 +582,8 @@ function App() {
 
             {status.message && (
               <p
-                className={`status-message ${
-                  status.type === "success" ? "success" : "error"
-                }`}
+                className={`status-message ${status.type === "success" ? "success" : "error"
+                  }`}
               >
                 {status.message}
               </p>
@@ -824,9 +823,8 @@ function App() {
             {faqs.map((item, index) => (
               <div
                 key={item.question}
-                className={`faq-item ${
-                  openFaqIndex === index ? "faq-open" : ""
-                }`}
+                className={`faq-item ${openFaqIndex === index ? "faq-open" : ""
+                  }`}
               >
                 <button
                   type="button"
@@ -907,7 +905,9 @@ function App() {
                 ×
               </button>
             </div>
+
             <div className="chat-body">
+              {/* SCROLLABLE MESSAGES */}
               <div className="chat-messages">
                 {chatMessages.map((m, idx) => (
                   <div
@@ -918,6 +918,7 @@ function App() {
                   </div>
                 ))}
               </div>
+
               <div className="chat-quick">
                 {quickQuestions.map((q) => (
                   <button
@@ -930,6 +931,7 @@ function App() {
                   </button>
                 ))}
               </div>
+
               <form className="chat-input-row" onSubmit={handleChatSubmit}>
                 <input
                   type="text"
@@ -951,6 +953,7 @@ function App() {
           </button>
         )}
       </div>
+
 
       {/* Floating WhatsApp button */}
       <a

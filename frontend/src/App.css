@@ -1254,9 +1254,10 @@ body {
   box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
 }
 
+/* IMPORTANT FIXES START HERE */
 .chat-window {
   width: 300px;
-  max-height: 420px;
+  height: 420px; /* fixed height so inside can scroll */
   border-radius: 16px;
   background: var(--card-bg);
   border: 1px solid var(--border-subtle);
@@ -1293,19 +1294,37 @@ body {
   color: var(--text-muted);
 }
 
+/* make body flex & shrinkable */
 .chat-body {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  min-height: 0; /* allows inner flex child to scroll */
 }
 
+/* SCROLLABLE AREA */
 .chat-messages {
   flex: 1;
+  min-height: 0;           /* critical line for scrolling */
   padding: 8px 10px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+/* custom scrollbar for chat messages */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
 }
 
 .chat-message {
@@ -1387,6 +1406,7 @@ body {
   color: #ffffff;
   cursor: pointer;
 }
+/* IMPORTANT FIXES END HERE */
 
 /* --- RESPONSIVE BREAKPOINTS --- */
 
@@ -1515,7 +1535,7 @@ body {
 
   .chat-window {
     width: 88vw;
-    max-height: 60vh;
+    height: 60vh; /* keep fixed height on small screens too */
   }
 }
 
