@@ -58,7 +58,7 @@ const packages = [
   {
     label: "Home starter",
     name: "2-Camera HD Kit",
-    price: "Starting around ₹3,999*",
+    price: "Starting around ₹6,999*",
     includes: [
       "2 indoor/outdoor HD cameras",
       "DVR/NVR configuration",
@@ -70,7 +70,7 @@ const packages = [
   {
     label: "Apartment / villa",
     name: "4-Camera Coverage",
-    price: "Usually from ₹6,999*",
+    price: "Usually from ₹9,999*",
     includes: [
       "4 HD cameras for key points",
       "Remote access on mobile",
