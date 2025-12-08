@@ -58,7 +58,7 @@ const packages = [
   {
     label: "Home starter",
     name: "2-Camera HD Kit",
-    price: "Starting around ₹8,999*",
+    price: "Starting around ₹3,999*",
     includes: [
       "2 indoor/outdoor HD cameras",
       "DVR/NVR configuration",
@@ -70,7 +70,7 @@ const packages = [
   {
     label: "Apartment / villa",
     name: "4-Camera Coverage",
-    price: "Usually from ₹12,999*",
+    price: "Usually from ₹6,999*",
     includes: [
       "4 HD cameras for key points",
       "Remote access on mobile",
@@ -111,6 +111,14 @@ const testimonials = [
   },
 ];
 
+const quickQuestions = [
+  "How much does a basic home CCTV setup cost?",
+  "Do you serve my area in Bangalore?",
+  "How long does installation take?",
+  "Do you provide AMC / yearly maintenance?",
+  "Can I view cameras on my mobile?",
+];
+
 function App() {
   const [formData, setFormData] = useState({
     name: "",
@@ -124,6 +132,20 @@ function App() {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  // theme: light / dark
+  const [theme, setTheme] = useState("light");
+
+  // simple chat assistant
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    {
+      from: "bot",
+      text:
+        "Hi! I'm LookOutline Assist. Ask about pricing, areas we serve, installation time, or warranty.",
+    },
+  ]);
 
   // scroll-into-view animations
   useEffect(() => {
@@ -145,6 +167,15 @@ function App() {
       elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
+
+  // attach theme to <html> so CSS can switch variables
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -204,6 +235,98 @@ function App() {
     });
   };
 
+  const handleChatToggle = () => {
+    setChatOpen((prev) => !prev);
+  };
+
+  const getChatReply = (text) => {
+    const q = text.toLowerCase();
+
+    if (
+      q.includes("price") ||
+      q.includes("cost") ||
+      q.includes("package") ||
+      q.includes("quote")
+    ) {
+      return (
+        "Most home CCTV setups start around ₹3,999–₹6,999 depending on camera count, cable length and brand. " +
+        "Share your details in the form above and we’ll send a clear, no-obligation quote."
+      );
+    }
+
+    if (
+      q.includes("area") ||
+      q.includes("location") ||
+      q.includes("serve") ||
+      q.includes("service") ||
+      q.includes("bangalore")
+    ) {
+      return (
+        "We currently serve all major areas in Bangalore – Electronic City, Whitefield, HSR, BTM, Yelahanka, Hebbal, KR Puram, Jayanagar, JP Nagar, Indiranagar and more. " +
+        "If you’re within Bangalore city limits, we most likely cover your area."
+      );
+    }
+
+    if (
+      q.includes("time") ||
+      q.includes("how long") ||
+      q.includes("install") ||
+      q.includes("installation")
+    ) {
+      return (
+        "A typical 2–4 camera home installation usually completes in the same day after confirmation. " +
+        "Bigger villas, apartments or offices may take 1–2 working days based on complexity."
+      );
+    }
+
+    if (q.includes("warranty") || q.includes("support") || q.includes("amc")) {
+      return (
+        "We provide a 1-year service warranty on installation workmanship, plus manufacturer warranty on cameras/NVRs. " +
+        "Annual maintenance (AMC) and health checks are available for long-term support."
+      );
+    }
+
+    if (
+      q.includes("mobile") ||
+      q.includes("app") ||
+      q.includes("remote") ||
+      q.includes("view")
+    ) {
+      return (
+        "Yes, you can watch your cameras on mobile from anywhere with internet. " +
+        "We configure the app for live view, playback and basic alerts during installation."
+      );
+    }
+
+    return (
+      "Thanks for your question! For anything specific, the best option is to leave your details in the form so we can call you back with an exact answer. " +
+      "You can also ask me about pricing, areas we serve, installation time, warranty or mobile viewing."
+    );
+  };
+
+  const sendChat = (question) => {
+    const trimmed = question.trim();
+    if (!trimmed) return;
+    const reply = getChatReply(trimmed);
+    setChatMessages((prev) => [
+      ...prev,
+      { from: "user", text: trimmed },
+      { from: "bot", text: reply },
+    ]);
+  };
+
+  const handleChatSubmit = (e) => {
+    e.preventDefault();
+    if (!chatInput.trim()) return;
+    sendChat(chatInput);
+    setChatInput("");
+  };
+
+  const handleQuickQuestion = (q) => {
+    setChatOpen(true);
+    sendChat(q);
+  };
+
   return (
     <div className="page" id="top">
       <header className="header">
@@ -221,11 +344,38 @@ function App() {
           <a href="#products">Products</a>
           <a href="#services">Services</a>
           <a href="#support">Support</a>
-          <a href="tel:+918088001088" className="nav-cta">
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          </button>
+          <a href="tel:+919876543210" className="nav-cta">
             📞 Call Now
           </a>
         </nav>
       </header>
+
+      {/* LIVE STATUS BAR */}
+      <section className="status-bar" data-animate>
+        <div className="status-left">
+          <span className="status-dot" />
+          <span className="status-live-text">Live status</span>
+        </div>
+        <div className="status-right">
+          <span className="status-chip">
+            📸 <strong>120+</strong> cameras secured this month
+          </span>
+          <span className="status-chip">
+            🧰 <strong>10+</strong> technicians on field
+          </span>
+          <span className="status-chip">
+            ⭐ <strong>4.9/5</strong> customer happiness
+          </span>
+        </div>
+      </section>
 
       {/* MAIN HERO (Services + Lead form) */}
       <main className="hero" id="services">
@@ -347,11 +497,11 @@ function App() {
 
           <div className="contact-quick">
             <span>Prefer talking now?</span>
-            <a href="tel:+918088001088" className="contact-link">
-              📞 Call us: +91 80880 01088
+            <a href="tel:+919876543210" className="contact-link">
+              📞 Call us: +91 98765 43210
             </a>
             <a
-              href="https://wa.me/918088001088"
+              href="https://wa.me/919876543210"
               target="_blank"
               rel="noreferrer"
               className="contact-link"
@@ -641,9 +791,74 @@ function App() {
         </section>
       </section>
 
+      {/* Chat widget (bottom left) */}
+      <div className="chat-widget">
+        {chatOpen ? (
+          <div className="chat-window">
+            <div className="chat-header">
+              <div>
+                <div className="chat-title">LookOutline Assist</div>
+                <div className="chat-subtitle">
+                  Quick questions about CCTV &amp; biometrics
+                </div>
+              </div>
+              <button
+                type="button"
+                className="chat-close"
+                onClick={handleChatToggle}
+                aria-label="Close chat"
+              >
+                ×
+              </button>
+            </div>
+            <div className="chat-body">
+              <div className="chat-messages">
+                {chatMessages.map((m, idx) => (
+                  <div
+                    key={idx}
+                    className={`chat-message chat-${m.from}`}
+                  >
+                    <div className="chat-bubble">{m.text}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="chat-quick">
+                {quickQuestions.map((q) => (
+                  <button
+                    key={q}
+                    type="button"
+                    className="chat-quick-btn"
+                    onClick={() => handleQuickQuestion(q)}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+              <form className="chat-input-row" onSubmit={handleChatSubmit}>
+                <input
+                  type="text"
+                  placeholder="Type your question…"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                />
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="chat-toggle-button"
+            onClick={handleChatToggle}
+          >
+            💡 Ask a question
+          </button>
+        )}
+      </div>
+
       {/* Floating WhatsApp button */}
       <a
-        href="https://wa.me/918088001088"
+        href="https://wa.me/919876543210"
         target="_blank"
         rel="noreferrer"
         className="floating-whatsapp"
