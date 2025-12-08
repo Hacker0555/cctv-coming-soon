@@ -1,7 +1,7 @@
 /* frontend/src/App.css */
 :root {
-  --bg-page: #fff6e8;
-  --header-bg: rgba(255, 246, 232, 0.92);
+  --bg-page: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.92);
   --text-main: #111827;
   --text-muted: #6b7280;
   --card-bg: #f9fafb;
@@ -143,9 +143,80 @@ body {
   cursor: pointer;
 }
 
+/* --- COUNTDOWN BAR --- */
+.countdown-bar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+[data-theme="dark"] .countdown-bar {
+  background: #020617;
+}
+
+.countdown-left {
+  min-width: 180px;
+}
+
+.countdown-title {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+.countdown-subtitle {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.countdown-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  text-align: center;
+  min-width: 60px;
+}
+
+.count-number {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #111827;
+}
+
+[data-theme="dark"] .count-number {
+  color: #f9fafb;
+}
+
+.count-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
 /* --- LIVE STATUS BAR --- */
 .status-bar {
-  margin-top: 10px;
+  margin-top: 2px;
   margin-bottom: 12px;
   padding: 8px 12px;
   border-radius: 999px;
@@ -1411,6 +1482,16 @@ body {
 
   .status-right {
     width: 100%;
+  }
+
+  .countdown-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .countdown-right {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .phone-card {

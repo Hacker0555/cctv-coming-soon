@@ -136,6 +136,14 @@ function App() {
   // theme: light / dark
   const [theme, setTheme] = useState("light");
 
+  // countdown timer (90 days from now)
+  const [timeLeft, setTimeLeft] = useState({
+    days: 90,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
   // simple chat assistant
   const [chatOpen, setChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState("");
@@ -172,6 +180,40 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  // countdown logic – 90 days from first visit
+  useEffect(() => {
+    const launchDate = new Date();
+    launchDate.setDate(launchDate.getDate() + 90);
+
+    let timerId;
+
+    const tick = () => {
+      const now = new Date();
+      const diff = launchDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        if (timerId) clearInterval(timerId);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (24 * 60 * 60));
+      const hours = Math.floor(
+        (totalSeconds % (24 * 60 * 60)) / (60 * 60)
+      );
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = totalSeconds % 60;
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    tick();
+    timerId = setInterval(tick, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -327,6 +369,8 @@ function App() {
     sendChat(q);
   };
 
+  const formatNumber = (n) => n.toString().padStart(2, "0");
+
   return (
     <div className="page" id="top">
       <header className="header">
@@ -374,6 +418,42 @@ function App() {
           <span className="status-chip">
             ⭐ <strong>4.9/5</strong> customer happiness
           </span>
+        </div>
+      </section>
+
+      {/* COUNTDOWN BAR */}
+      <section className="countdown-bar" data-animate>
+        <div className="countdown-left">
+          <p className="countdown-title">COMING SOON</p>
+          <p className="countdown-subtitle">
+            LookOutline security platform launches in:
+          </p>
+        </div>
+        <div className="countdown-right">
+          <div className="countdown-item">
+            <span className="count-number">
+              {formatNumber(timeLeft.days)}
+            </span>
+            <span className="count-label">Days</span>
+          </div>
+          <div className="countdown-item">
+            <span className="count-number">
+              {formatNumber(timeLeft.hours)}
+            </span>
+            <span className="count-label">Hours</span>
+          </div>
+          <div className="countdown-item">
+            <span className="count-number">
+              {formatNumber(timeLeft.minutes)}
+            </span>
+            <span className="count-label">Minutes</span>
+          </div>
+          <div className="countdown-item">
+            <span className="count-number">
+              {formatNumber(timeLeft.seconds)}
+            </span>
+            <span className="count-label">Seconds</span>
+          </div>
         </div>
       </section>
 
