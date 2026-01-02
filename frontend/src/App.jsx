@@ -119,27 +119,43 @@ const quickQuestions = [
   "Can I view cameras on my mobile?",
 ];
 
+
 /* ---------- COUNTDOWN HELPERS (persistent 90 days) ---------- */
 
 const LAUNCH_OFFSET_DAYS = 90;
 
-// Get or create a fixed launch date (90 days from first visit)
+// Use a single key, but also try fallback keys in case older builds used different ones
+const LAUNCH_KEY = "lookoutline_launch_date_v1";
+
 const getLaunchDate = () => {
-  if (typeof window !== "undefined") {
-    const stored = window.localStorage.getItem("lookoutline_launch_date");
-    if (stored) {
-      const d = new Date(stored);
-      if (!Number.isNaN(d.getTime())) return d;
+  if (typeof window === "undefined") {
+    const d = new Date();
+    d.setDate(d.getDate() + LAUNCH_OFFSET_DAYS);
+    return d;
+  }
+
+  // 1) Try the current key
+  const stored = window.localStorage.getItem(LAUNCH_KEY);
+
+  // 2) Try old key (your existing one) if current key not found
+  const oldStored = window.localStorage.getItem("lookoutline_launch_date");
+
+  const chosen = stored || oldStored;
+
+  if (chosen) {
+    const d = new Date(chosen);
+    if (!Number.isNaN(d.getTime())) {
+      // if it came from the old key, migrate it to new key
+      if (!stored && oldStored) window.localStorage.setItem(LAUNCH_KEY, d.toISOString());
+      return d;
     }
   }
 
+  // If nothing stored, create once and store
   const d = new Date();
   d.setDate(d.getDate() + LAUNCH_OFFSET_DAYS);
 
-  if (typeof window !== "undefined") {
-    window.localStorage.setItem("lookoutline_launch_date", d.toISOString());
-  }
-
+  window.localStorage.setItem(LAUNCH_KEY, d.toISOString());
   return d;
 };
 
@@ -159,6 +175,7 @@ const calculateTimeLeft = (targetDate) => {
 
   return { days, hours, minutes, seconds };
 };
+
 
 /* --------------------------- APP --------------------------- */
 
