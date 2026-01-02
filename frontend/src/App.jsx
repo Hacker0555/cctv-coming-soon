@@ -1,7 +1,7 @@
 // frontend/src/App.jsx
 import { useState, useEffect } from "react";
 import "./App.css";
-import logo from "./assets/lookoutline-logo.png"; // make sure this file exists
+import logo from "./assets/lookoutline-logo2.png"; // make sure this file exists
 
 const faqs = [
   {
